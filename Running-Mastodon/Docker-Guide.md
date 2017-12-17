@@ -81,6 +81,16 @@ The default docker-compose.yml maps them to the repository's `public/assets` and
 Running any of these tasks via docker-compose would look like this:
 
     docker-compose run --rm web rake mastodon:media:clear
+    
+## PostgreSQL database backups
+
+Mastodon uses a PostgreSQL database as it's relational database. This database needs to be backed up regularly.
+
+You can back up your postgresql data using pg_dump from a linked `postgres` container
+
+    docker run --rm --link mastodon_db_1:postgres --net mastodon_default postgres pg_dump -h postgres -U postgres > mastodon_production.sql
+
+More information: https://hub.docker.com/_/postgres/
 
 ## Updating
 
